@@ -21,7 +21,8 @@ services:
       context: .
       dockerfile: Dockerfile.server
     volumes:
-      - ./Dataset:/app/Dataset # Mount datasets so the API can read them
+      - ./Dataset:/app/Dataset         # Mount datasets so the API can read them
+      - ./model/artifacts:/app/model/artifacts  # Mount trained model artifacts
     # Connects to your existing Postgres/Redis services here
 
   postgres:

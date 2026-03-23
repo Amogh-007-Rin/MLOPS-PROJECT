@@ -20,6 +20,14 @@ MarkupSafe==3.0.3
 mdurl==0.1.2
 numpy==2.4.3
 pandas==3.0.1
+scikit-learn==1.6.1
+matplotlib==3.10.1
+seaborn==0.13.2
+joblib==1.4.2
+optuna==4.2.1
+imbalanced-learn==0.13.0
+notebook==7.4.2
+ipykernel==6.29.5
 pydantic==2.12.5
 pydantic-extra-types==2.11.0
 pydantic-settings==2.13.1
