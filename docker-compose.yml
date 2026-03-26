@@ -1,39 +1,95 @@
 services:
+
+  # ── Gateway ──────────────────────────────────────────────────────────────────
   nginx:
     image: nginx:alpine
     container_name: mlops_gateway
     ports:
-      - "80:80"
+      - "80:80"     # HTTP / React UI / FastAPI
+      - "9001:9001" # WebSocket (direct fallback if nginx WS proxy is bypassed)
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - client
       - server
+      - sockets
+    restart: unless-stopped
 
+  # ── Frontend ─────────────────────────────────────────────────────────────────
   client:
     build:
       context: .
       dockerfile: Dockerfile.client
-    # No need to expose ports to host, Nginx handles it internally
+    restart: unless-stopped
 
+  # ── Primary backend ───────────────────────────────────────────────────────────
   server:
     build:
       context: .
       dockerfile: Dockerfile.server
+    environment:
+      DATABASE_URL: postgresql://mlops:password123@postgres:5432/mlops
+      REDIS_URL: redis://redis:6379/0
+      SENTRY_DSN: ${SENTRY_DSN:-}
     volumes:
-      - ./Dataset:/app/Dataset         # Mount datasets so the API can read them
-      - ./model/artifacts:/app/model/artifacts  # Mount trained model artifacts
-    # Connects to your existing Postgres/Redis services here
+      - ./Dataset:/app/Dataset
+      - ./model/artifacts:/app/model/artifacts
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
 
+  # ── Worker service ────────────────────────────────────────────────────────────
+  worker:
+    build:
+      context: ./workers-sb
+      dockerfile: Dockerfile
+    environment:
+      PORT: "3000"
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "3000:3000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── WebSocket layer ───────────────────────────────────────────────────────────
+  sockets:
+    build:
+      context: ./sockets
+      dockerfile: Dockerfile
+    ports:
+      - "9001:9001"
+    restart: unless-stopped
+
+  # ── PostgreSQL ────────────────────────────────────────────────────────────────
   postgres:
     image: postgres:16-alpine
     environment:
+      POSTGRES_DB: mlops
+      POSTGRES_USER: mlops
       POSTGRES_PASSWORD: password123
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mlops -d mlops"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
 
+  # ── Redis ─────────────────────────────────────────────────────────────────────
   redis:
     image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
 
 volumes:
   postgres_data:
