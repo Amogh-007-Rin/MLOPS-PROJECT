@@ -1,6 +1,6 @@
 # What Has Been Done — MLOPS-PROJECT
 
-**Last updated:** 2026-03-23
+**Last updated:** 2026-03-26
 **Project:** NASA Near-Earth Object Hazard Prediction — Full-Stack MLOps Application
 
 ---
@@ -592,23 +592,23 @@ docker compose up --build
 
 ### High Priority (core functionality)
 - [ ] **Run the notebooks** — `Pre-processing.ipynb` through `Final-model.ipynb` have never been executed; all code is written but no models are trained yet
-- [ ] **Connect PostgreSQL to the server** — database is in Docker Compose but `server/app.py` has no DB connection code
-- [ ] **Connect Redis to the worker or server** — Redis is in Docker Compose but not used anywhere
-- [ ] **Fix Dockerfile.server CMD** — current CMD is `uvicorn server.app:app` but the file is `server/app.py` (likely should be `uvicorn app:app` from within WORKDIR `/app/server`)
+- [x] **Connect PostgreSQL to the server** — `asyncpg` pool added; predictions table auto-created on startup; each prediction logged
+- [x] **Connect Redis to the worker or server** — Redis caching added to both the server (prediction cache, 1-hour TTL) and the worker (cache stats/flush endpoints)
+- [x] **Fix Dockerfile.server CMD** — fixed to `uvicorn app:app`
 
 ### Medium Priority (features)
-- [ ] **Implement React UI** — `client/src/App.tsx` is the default Vite boilerplate; needs a form to submit asteroid data and display predictions
-- [ ] **Implement the Worker service** — `workers-sb/src/index.ts` only has a health check; intended for background processing / Redis cache operations
-- [ ] **Implement Rust WebSocket layer** — `sockets/src/main.rs` is a placeholder; needs actual WebSocket implementation (likely for real-time prediction streaming or progress updates)
-- [ ] **Write ML model tests** — `test-ml-model/test.py` is an empty stub; should test prediction function, feature engineering, and model output shapes
-- [ ] **Write API tests** — `server/server-api.test/api.test.py` is empty; should test `/api/predict` request/response validation
+- [x] **Implement React UI** — `client/src/App.tsx` replaced with an asteroid prediction form with dark-mode UI and hazard/safe result display
+- [x] **Implement the Worker service** — `workers-sb/src/index.ts` now connects to Redis and exposes `GET /cache/stats` and `DELETE /cache/flush`
+- [x] **Implement Rust WebSocket layer** — `sockets/src/main.rs` implements a tokio-tungstenite broadcast WebSocket server on port 9001
+- [x] **Write ML model tests** — `test-ml-model/test.py` covers feature engineering correctness, artifact loading, classifier/regressor output shapes
+- [x] **Write API tests** — `server/server-api.test/api.test.py` covers health endpoints, input validation (422s), inference shape, determinism, and 503 path
 
 ### Low Priority (ops)
-- [ ] **Enable CI/CD pipeline** — uncomment `main.yml` jobs once tests are written and DockerHub secrets are configured
-- [ ] **Add prediction logging to PostgreSQL** — log each prediction request and response for monitoring and drift detection
-- [ ] **Add Redis caching** — cache predictions for repeated identical inputs
-- [ ] **Fix typo in context filename** — `Experimentaion-notebook.md` should be `Experimentation-notebook.md`
-- [ ] **Configure Sentry error tracking** — `sentry-sdk` is in requirements.txt but not initialised in `app.py`
+- [x] **Enable CI/CD pipeline** — `main.yml` uncommented and expanded with 4 jobs: test-server, test-client, test-worker, build-and-push
+- [x] **Add prediction logging to PostgreSQL** — done in `server/app.py` lifespan + predict endpoint
+- [x] **Add Redis caching** — done in `server/app.py` with SHA-256 keyed cache (1-hour TTL)
+- [x] **Fix typo in context filename** — renamed to `Experimentation-notebook.md`
+- [x] **Configure Sentry error tracking** — `sentry_sdk.init()` called at startup when `SENTRY_DSN` env var is set
 
 ---
 
