@@ -111,7 +111,7 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/data:/opt/airflow/data
+      - ./Dataset/Raw-Dataset:/opt/airflow/data
 
   # ── Webserver ─────────────────────────────────────────────────────────────────
   webserver:
@@ -132,7 +132,7 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/data:/opt/airflow/data
+      - ./Dataset/Raw-Dataset:/opt/airflow/data
 
   # ── Scheduler ─────────────────────────────────────────────────────────────────
   scheduler:
@@ -150,7 +150,7 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/data:/opt/airflow/data
+      - ./Dataset/Raw-Dataset:/opt/airflow/data
 
 volumes:
   postgres_data:
