@@ -1,0 +1,17 @@
+FROM node:22-alpine
+
+WORKDIR /app/client
+
+# Copy package files from the local 'client' folder
+COPY client/package*.json ./
+
+RUN npm install
+
+# Copy the rest of the client source code
+COPY client/ .
+
+# Vite's default dev port
+EXPOSE 5173
+
+# IMPORTANT: --host 0.0.0.0 is required to access it from your Arch browser
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

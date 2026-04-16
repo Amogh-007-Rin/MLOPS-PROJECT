@@ -1,0 +1,35 @@
+[2026-04-10T16:11:54.000+0000] {processor.py:161} INFO - Started process (PID=46) to work on /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:11:54.002+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/csv_to_postgress.py for tasks to queue
+[2026-04-10T16:11:54.006+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:11:54.006+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:11:56.166+0000] {processor.py:840} INFO - DAG(s) 'csv_to_postgres' retrieved from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:11:56.593+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:11:56.592+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-10T16:11:56.608+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:11:56.608+0000] {dag.py:3947} INFO - Setting next_dagrun for csv_to_postgres to None, run_after=None
+[2026-04-10T16:11:56.637+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/csv_to_postgress.py took 2.649 seconds
+[2026-04-10T16:12:26.956+0000] {processor.py:161} INFO - Started process (PID=48) to work on /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:12:26.959+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/csv_to_postgress.py for tasks to queue
+[2026-04-10T16:12:26.972+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:12:26.965+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:12:27.824+0000] {processor.py:840} INFO - DAG(s) 'csv_to_postgres' retrieved from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:12:27.986+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:12:27.985+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-10T16:12:28.050+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:12:28.050+0000] {dag.py:3947} INFO - Setting next_dagrun for csv_to_postgres to None, run_after=None
+[2026-04-10T16:12:28.123+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/csv_to_postgress.py took 1.186 seconds
+[2026-04-10T16:12:58.201+0000] {processor.py:161} INFO - Started process (PID=50) to work on /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:12:58.204+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/csv_to_postgress.py for tasks to queue
+[2026-04-10T16:12:58.209+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:12:58.208+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:12:58.904+0000] {processor.py:840} INFO - DAG(s) 'csv_to_postgres' retrieved from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:12:59.005+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:12:59.003+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-10T16:12:59.048+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:12:59.048+0000] {dag.py:3947} INFO - Setting next_dagrun for csv_to_postgres to None, run_after=None
+[2026-04-10T16:12:59.144+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/csv_to_postgress.py took 0.959 seconds
+[2026-04-10T16:13:29.557+0000] {processor.py:161} INFO - Started process (PID=52) to work on /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:13:29.561+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/csv_to_postgress.py for tasks to queue
+[2026-04-10T16:13:29.595+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:13:29.588+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:13:31.201+0000] {processor.py:840} INFO - DAG(s) 'csv_to_postgres' retrieved from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:13:31.365+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:13:31.364+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-10T16:13:31.478+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:13:31.477+0000] {dag.py:3947} INFO - Setting next_dagrun for csv_to_postgres to None, run_after=None
+[2026-04-10T16:13:31.571+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/csv_to_postgress.py took 2.101 seconds
+[2026-04-10T16:14:02.564+0000] {processor.py:161} INFO - Started process (PID=54) to work on /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:14:02.572+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/csv_to_postgress.py for tasks to queue
+[2026-04-10T16:14:02.655+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:14:02.641+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:14:05.886+0000] {processor.py:840} INFO - DAG(s) 'csv_to_postgres' retrieved from /opt/airflow/dags/csv_to_postgress.py
+[2026-04-10T16:14:06.193+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:14:06.189+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-10T16:14:06.322+0000] {logging_mixin.py:188} INFO - [2026-04-10T16:14:06.321+0000] {dag.py:3947} INFO - Setting next_dagrun for csv_to_postgres to None, run_after=None
+[2026-04-10T16:14:06.437+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/csv_to_postgress.py took 4.035 seconds
