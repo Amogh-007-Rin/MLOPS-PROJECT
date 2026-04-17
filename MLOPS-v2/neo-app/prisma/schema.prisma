@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model user {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+}
+
+model NearEarthObject {
+  id                 Int     @id
+  name               String
+  est_diameter_min   Float
+  est_diameter_max   Float
+  relative_valocity  Float
+  miss_distance      Float
+  orbiting_body      String  @default("EARTH")
+  sentry_object      Boolean
+  absolute_magnitude Float
+  hazardous          Boolean
+}
+
+// model NearEarthObjectNewFeatures{
+//   featureId Int @id @default(autoincrement())
+// }
