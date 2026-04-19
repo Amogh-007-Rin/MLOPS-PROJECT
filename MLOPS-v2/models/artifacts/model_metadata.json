@@ -1,0 +1,52 @@
+{
+  "trained_at": "2026-04-19T16:12:37.087852",
+  "classifier": {
+    "model": "RandomForestClassifier",
+    "hyperparams": {
+      "n_estimators": 317,
+      "max_depth": 20,
+      "min_samples_split": 13,
+      "min_samples_leaf": 3,
+      "max_features": "sqrt",
+      "random_state": 42,
+      "n_jobs": -1
+    },
+    "test_f1_weighted": 0.8763,
+    "test_auc_roc": 0.93
+  },
+  "regressor": {
+    "model": "RandomForestRegressor",
+    "hyperparams": {
+      "n_estimators": 338,
+      "max_depth": 11,
+      "min_samples_split": 4,
+      "min_samples_leaf": 10,
+      "max_features": "log2",
+      "random_state": 42,
+      "n_jobs": -1
+    },
+    "test_r2": 0.1668,
+    "test_rmse_log": 1.0427,
+    "test_mae_log": 0.7562,
+    "test_rmse_km": 22409891.0
+  },
+  "features": {
+    "clf_features": [
+      "log_diameter_avg",
+      "log_diameter_ratio",
+      "log_relative_velocity",
+      "log_miss_distance",
+      "absolute_magnitude",
+      "diameter_avg",
+      "diameter_ratio"
+    ],
+    "reg_features": [
+      "log_diameter_avg",
+      "log_diameter_ratio",
+      "log_relative_velocity",
+      "absolute_magnitude",
+      "diameter_avg",
+      "diameter_ratio"
+    ]
+  }
+}
