@@ -24,7 +24,7 @@ model NearEarthObject {
   name               String
   est_diameter_min   Float
   est_diameter_max   Float
-  relative_valocity  Float
+  relative_velocity  Float
   miss_distance      Float
   orbiting_body      String  @default("EARTH")
   sentry_object      Boolean
