@@ -12,7 +12,7 @@ datasource db {
   provider = "postgresql"
 }
 
-model user {
+model Admin {
   id       Int    @id @default(autoincrement())
   name     String
   email    String @unique
@@ -30,8 +30,30 @@ model NearEarthObject {
   sentry_object      Boolean
   absolute_magnitude Float
   hazardous          Boolean
+
+  engineeredFeatures NearEarthObjectNewFeatures[]
 }
 
-// model NearEarthObjectNewFeatures{
-//   featureId Int @id @default(autoincrement())
-// }
+model NearEarthObjectNewFeatures {
+  featureId Int @id @default(autoincrement())
+
+  // Derived diameter features
+  diameter_avg   Float // (est_diameter_min + est_diameter_max) / 2
+  diameter_ratio Float // est_diameter_max / est_diameter_min
+
+  // Log-transformed features (corrects right-skewed distributions)
+  log_diameter_avg      Float // log1p(diameter_avg)
+  log_diameter_ratio    Float // log1p(diameter_ratio)
+  log_relative_velocity Float // log1p(relative_velocity)
+  log_miss_distance     Float // log1p(miss_distance)
+
+  // Retained raw feature
+  absolute_magnitude Float
+
+  // Target variable (0 = safe, 1 = hazardous)
+  hazardous Int
+
+  // Optional back-reference to the source NEO record
+  sourceNeoId Int?
+  sourceNeo   NearEarthObject? @relation(fields: [sourceNeoId], references: [id])
+}
