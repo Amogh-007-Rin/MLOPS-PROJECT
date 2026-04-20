@@ -6,6 +6,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
@@ -41,6 +42,13 @@ app = FastAPI(
     description="Near Earth Object hazard classification and miss distance prediction API",
     version="1.0.0",
     lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -81,8 +89,8 @@ def _run_inference(body: AsteroidInput) -> PredictionOutput:
         body.absolute_magnitude, diameter_avg, diameter_ratio,
     ]], columns=reg_features)
 
-    clf_scaled = models["scaler_clf"].transform(clf_input)
-    reg_scaled = models["scaler_reg"].transform(reg_input)
+    clf_scaled = pd.DataFrame(models["scaler_clf"].transform(clf_input), columns=clf_features)
+    reg_scaled = pd.DataFrame(models["scaler_reg"].transform(reg_input), columns=reg_features)
 
     return PredictionOutput(
         hazardous=bool(models["clf"].predict(clf_scaled)[0]),
